@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Ahmad | Professional Carpenter</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="Images/accordian.png">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <!-- Remix Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/testimonial.css">
+
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+            
+
+        /* Video Portfolio Styles */
+        .video-portfolio {
+            padding: 50px 0;
+            background: var(--bg-light);
+        }
+
+        .video-carousel {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 177.77%; /* 9:16 Aspect Ratio */
+            margin: 0 auto;
+            max-width: 340px;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-container .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            z-index: 2;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .video-container .play-button::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 15px 0 15px 25px;
+            border-color: transparent transparent transparent #ffffff;
+            margin-left: 5px;
+        }
+
+        .video-container .play-button:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .video-container:hover video {
+            transform: scale(1.05);
+        }
+
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content video {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 10px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            .video-container {
+                max-width: 280px;
+            }
+        }
+        
+        .gallery-section {
+            max-width: 1200px;
+            margin: 50px auto;
+        }
+
+        .gallery-section .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #5e3a23;
+            font-size: 2.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .gallery-section .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #c19a6b;
+        }
+
+        /* Categories Filter */
+        .categories-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            background-color: #f8f5f1;
+            border: 2px solid #c19a6b;
+            color: #5e3a23;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background-color: #c19a6b;
+            color: white;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-item {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%; /* This creates the 1:1 aspect ratio */
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid #c19a6b; /* Yellow border */
+        }
+
+        .gallery-item.hidden {
+            display: none;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item-inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease 0.1s;
+        }
+
+        .project-description {
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease 0.2s;
+        }
+
+        .gallery-item:hover .project-title,
+        .gallery-item:hover .project-description {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .view-project-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background-color: #c19a6b;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover .view-project-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .view-project-btn:hover {
+            background-color: #a67c52;
+            transform: translateY(-2px);
+        }
+
+        /* Full Image Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+
+        #imageModal .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 5px solid #c19a6b;
+            box-shadow: 0 0 20px rgba(193, 154, 107, 0.7);
+        }
+
+        #imageModal .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #c19a6b;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            transition: color 0.3s ease;
+        }
+
+        #imageModal .close-modal:hover {
+            color: white;
+        }
+
+        .modal-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-align: center;
+            width: 80%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+            
+            .gallery-section .section-title {
+                font-size: 2rem;
+            }
+            
+            .categories-container {
+                gap: 10px;
+            }
+            
+            .category-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Quote Section */
+    .quote-section {
+      background-color: #f5f5f5;
+    }
+    
+    .quote-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+    }
+    
+    @media (max-width: 900px) {
+      .quote-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    </style>
+<meta name="google-site-verification" content="fPCph6tYl-Efrcf9lZ_DQDgR_0_cVniux0R0R0tjJ_Q" />
+</head>
+<body>
+    <div class="greeting-overlay" id="greetingOverlay" aria-hidden="true" role="dialog">
+        <div class="greeting-card">
+            <h2>السلام علیکم ورحمة الله وبرکاته</h2>
+            <p>امید ہے آپ خیریت سے ہوں گے</p>
+            <span class="greeting-name">CARPENTER MUHAMMAD Ahmad</span>
+        </div>
+    </div>
+    <!-- All your HTML content here (everything between <body> and </body> from the original file) -->
+      <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-hard-hat"></i>
+                <h1>Carpenter Ahmad</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Hello I,m Ahmad </h1>
+                <p class="tagline">Crafting Quality, Building Trust</p>
+                <div class="typing-text">Professional <span id="typing"></span></div>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn">Hire Me Now</a>
+                    <a href="https://wa.me/+923079499909" class="btn whatsapp-button" target="_blank" style="background-color:#25D366;color:#fff;border:none;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Me 
+                    </a>
+                </div>
+            </div>
+            <div class="hero-img">
+                <div class="profile-circle">
+                    <img src="Images/accordian.png" alt="Muhammad Ahmad Carpenter portrait">
+                </div>
+                <!-- Removed mobile-call button -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="section-title">
+            <h2>About Me</h2>
+            <p>Learn more about my professional background and expertise</p>
+        </div>
+        <div class="about-content">
+            <div class="about-img">
+                <div class="portrait-frame">
+                    <img src="Images/men-1.png" alt="Muhammad Ahmad Carpenter working in the workshop">
+                </div>
+            </div>
+            <div class="about-text">
+                <h3>Experienced Carpenter</h3>
+                <p>With years of experience in carpentry, I specialize in providing high-quality carpentry services to meet your needs.</p>
+                <p>My expertise ranges from custom furniture to detailed woodwork, ensuring every project meets the highest standards of quality and efficiency.</p>
+                
+                <div class="trust-badges">
+                    <div class="badge">
+                        <i class="fas fa-award"></i>
+                        <div>
+                            <h4>Certified Professional</h4>
+                            <p>Certified Carpenter</p>
+                        </div>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <h4>Insured</h4>
+                            <p>Full Liability Coverage</p>
+                        </div>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-handshake"></i>
+                        <div>
+                            <h4>Reliable</h4>
+                            <p>On-Time Project Delivery</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="#contact" class="btn">Hire Me Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="section-title">
+            <h2>My Services</h2>
+            <p>Comprehensive solutions for all your carpentry needs</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="Images/Project-1.jpg" alt="Custom Furniture">
+                </div>
+                <div class="service-content">
+                    <h3>CUSTOM WARDROBE</h3>
+                    <p>Design and build custom wardrobes tailored to your specific needs and style.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="Images/service-3.jpg" alt="Detailed Woodwork">
+                </div>
+                <div class="service-content">
+                    <h3>DETAILED WOODWORK</h3>
+                    <p>Intricate woodwork and carving for decorative and functional purposes.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="Images/service-1.jpg" alt="Renovation and Remodeling Craftsmanship">
+                </div>
+                <div class="service-content">
+                    <h3>Renovation & Remodeling</h3>
+                    <p>Transforming existing spaces with custom carpentry solutions.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="Images/service-2.jpg" alt="Furniture Repair Excellence">
+                </div>
+                <div class="service-content">
+                    <h3>FURNITURE REPAIR</h3>
+                    <p>Repair and restoration services to bring your old furniture back to life.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="Images/kitchen cabinate.637Z.png" alt="Custom Kitchen Cabinets">
+                </div>
+                <div class="service-content">
+                    <h3>Custom Kitchen Cabinets</h3>
+                    <p>Expertly crafted kitchen cabinets tailored to your space and style preferences.</p>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="Images/office renoavation.075Z.png" alt="Office Renovation">
+                </div>
+                <div class="service-content">
+                    <h3>OFFICE RENOVATION</h3>
+                    <p>Custom-made doors and windows with premium wood and detailed craftsmanship.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-choose-us" class="why-choose-us">
+        <div class="section-title">
+            <h2>Why Choose Us?</h2>
+            <p>Our commitment to quality and customer satisfaction</p>
+        </div>
+        <div class="why-choose-us-content">
+            <div class="why-choose-us-text">
+                <h3>Your Trusted Carpentry Partner</h3>
+                <p>We believe in building more than just furniture; we build relationships based on trust and quality craftsmanship.</p>
+                <div class="trust-badges">
+                    <div class="badge">
+                        <i class="fas fa-tools"></i>
+                        <div>
+                            <h4>Quality Materials</h4>
+                            <p>Only the best woods and materials</p>
+                        </div>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-ruler-combined"></i>
+                        <div>
+                            <h4>Precision & Detail</h4>
+                            <p>Meticulous attention to every detail</p>
+                        </div>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-headset"></i>
+                        <div>
+                            <h4>Customer Support</h4>
+                            <p>Dedicated support from start to finish</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="why-choose-us-buttons">
+                    <a href="#services" class="btn">Learn More</a>
+                    <a href="https://wa.me/+923079499909" class="btn whatsapp-button" target="_blank" style="background-color:#25D366;color:#fff;border:none;">
+                        <i class="fab fa-whatsapp"></i> Connect on WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="why-choose-us-img">
+                <img src="Images/image-2.jpg" alt="Why Choose Us">
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-project-diagram"></i>
+                <h3>150+</h3>
+                <p>Projects Completed</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-smile"></i>
+                <h3>100%</h3>
+                <p>Client Satisfaction</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-furniture-alt"></i>
+                <h3>45+</h3>
+                <p>Furniture Created</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-home"></i>
+                <h3>85</h3>
+                <p>Home Interior Projects</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Portfolio Section -->
+    <section class="video-portfolio">
+        <div class="section-title">
+            <h2>Video Portfolio</h2>
+            <p>Watch our carpentry work in action</p>
+        </div>
+        <div class="owl-carousel video-carousel">
+            <div class="video-container">
+                <div class="play-button"></div>
+                <video src="WhatsApp Video 2025-07-24 at 11.59.50 AM.mp4"  muted loop playsinline></video>
+            </div>
+            <div class="video-container">
+                <div class="play-button"></div>
+                <video src="Images/tv screen.mp4"  muted loop playsinline></video>
+            </div>
+            <div class="video-container">
+                <div class="play-button"></div>
+                <video src="Images/kitchen.mp4"  muted loop playsinline></video>
+            </div>
+            <!-- Added 3 more videos, duplicating sources -->
+            <div class="video-container">
+                <div class="play-button"></div>
+                <video src="Images/almari (1).mp4"  muted loop playsinline></video>
+            </div>
+            <div class="video-container">
+                <div class="play-button"></div>
+                <video src="Images/Tv wall (2).mp4"  muted loop playsinline></video>
+            </div>
+            <div class="video-container">
+                <div class="play-button"></div>
+                <video src="Images/almari (2).mp4"  muted loop playsinline></video>
+            </div>
+        </div>
+        <!-- Fullscreen Video Modal -->
+        <div class="video-modal" id="videoModal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <video controls></video>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="gallery-section">
+        <div class="section-title">
+            <h2>Our Projects</h2>
+        </div>
+        
+        <!-- Categories Filter -->
+        <div class="categories-container" role="tablist" aria-label="Project categories">
+            <button class="category-btn active" data-category="all" role="tab" aria-selected="true">All Projects</button>
+            <button class="category-btn" data-category="furniture" role="tab" aria-selected="false">Furniture</button>
+            <button class="category-btn" data-category="kitchen" role="tab" aria-selected="false">Kitchen</button>
+            <button class="category-btn" data-category="outdoor" role="tab" aria-selected="false">Outdoor</button>
+            <button class="category-btn" data-category="custom" role="tab" aria-selected="false">Custom Builds</button>
+        </div>
+        
+        <div class="gallery-container">
+            <!-- Project 1 -->
+            <div class="gallery-item" data-category="furniture">
+                <div class="gallery-item-inner" data-img-src="Images/Project-1.jpg" data-title="Custom Dining Table" data-desc="Handcrafted from solid oak with a natural finish, perfect for family gatherings.">
+                    <img src="Images/Project-1.jpg" alt="Custom Wooden Dining Table" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="project-title">Custom Dining Table</h3>
+                        <p class="project-description">Handcrafted from solid oak with a natural finish, perfect for family gatherings.</p>
+                        <button class="view-project-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="gallery-item" data-category="custom">
+                <div class="gallery-item-inner" data-img-src="Images/Project-2 copy.jpg" data-title="Built-in Bookshelf" data-desc="Floor-to-ceiling custom shelving with integrated lighting for the perfect home library.">
+                    <img src="Images/Project-2 copy.jpg" alt="Built-in Bookshelf" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="project-title">Built-in Bookshelf</h3>
+                        <p class="project-description">Floor-to-ceiling custom shelving with integrated lighting for the perfect home library.</p>
+                        <button class="view-project-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="gallery-item" data-category="kitchen">
+                <div class="gallery-item-inner" data-img-src="Images/Project-5.jpg" data-title="Kitchen Cabinets" data-desc="Custom maple cabinets with soft-close mechanisms and elegant hardware.">
+                    <img src="Images/Project-5.jpg" alt="Modern Kitchen Cabinets" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="project-title">Kitchen Cabinets</h3>
+                        <p class="project-description">Custom maple cabinets with soft-close mechanisms and elegant hardware.</p>
+                        <button class="view-project-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="gallery-item" data-category="furniture">
+                <div class="gallery-item-inner" data-img-src="Images/Project-6.jpg" data-title="Bed Frame" data-desc="Solid walnut platform bed with integrated nightstands and hidden storage.">
+                    <img src="Images/Project-6.jpg" alt="Wooden Bed Frame" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="project-title">Bed Frame</h3>
+                        <p class="project-description">Solid walnut platform bed with integrated nightstands and hidden storage.</p>
+                        <button class="view-project-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="gallery-item" data-category="furniture">
+                <div class="gallery-item-inner" data-img-src="Images/office table.jpg" data-title="Executive Desk" data-desc="Cherry wood desk with hand-carved details and cable management system.">
+                    <img src="Images/office table.jpg" alt="Wooden Office Desk" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="project-title">Executive Desk</h3>
+                        <p class="project-description">Cherry wood desk with hand-carved details and cable management system.</p>
+                        <button class="view-project-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="gallery-item" data-category="outdoor">
+                <div class="gallery-item-inner" data-img-src="Images/tv scree image.jpg" data-title="Wall Tv Unit" data-desc="Weather-resistant cedar deck with built-in seating and custom railings.">
+                    <img src="Images/tv scree image.jpg" alt="Outdoor Wooden Deck" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="project-title">Wall Tv Unit</h3>
+                        <p class="project-description">Weather-resistant cedar deck with built-in seating and custom railings.</p>
+                        <button class="view-project-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Project 7: Project-3.jpg - Furniture -->
+            <div class="gallery-item" data-category="furniture">
+                <div class="gallery-item-inner" data-img-src="Images/Project-3.jpg" data-title="Custom Wardrobe" data-desc="Elegant custom wardrobe with premium wood finish and ample storage space.">
+                    <img src="Images/Project-3.jpg" alt="Custom Wardrobe" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="project-title">Custom Wardrobe</h3>
+                        <p class="project-description">Elegant custom wardrobe with premium wood finish and ample storage space.</p>
+                        <button class="view-project-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Project 8: Project-4.jpg - Custom -->
+            <div class="gallery-item" data-category="custom">
+                <div class="gallery-item-inner" data-img-src="Images/Project-4.jpg" data-title="Handcrafted Cabinet" data-desc="Beautifully designed cabinet showcasing intricate woodwork details.">
+                    <img src="Images/Project-4.jpg" alt="Handcrafted Cabinet" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="project-title">Handcrafted Cabinet</h3>
+                        <p class="project-description">Beautifully designed cabinet showcasing intricate woodwork details.</p>
+                        <button class="view-project-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Project 9: project-12.jpg - Kitchen -->
+            <div class="gallery-item" data-category="kitchen">
+                <div class="gallery-item-inner" data-img-src="Images/project-12.jpg" data-title="Modern Kitchen Setup" data-desc="Contemporary kitchen installation with custom cabinetry and modern finishes.">
+                    <img src="Images/project-12.jpg" alt="Modern Kitchen Setup" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="project-title">Modern Kitchen Setup</h3>
+                        <p class="project-description">Contemporary kitchen installation with custom cabinetry and modern finishes.</p>
+                        <button class="view-project-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Project 10: project-14.jpg - Outdoor -->
+            <div class="gallery-item" data-category="outdoor">
+                <div class="gallery-item-inner" data-img-src="Images/project-14.jpg" data-title="Outdoor Furniture Set" data-desc="Durable outdoor furniture designed for comfort and style.">
+                    <img src="Images/project-14.jpg" alt="Outdoor Furniture Set" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="project-title">Outdoor Furniture Set</h3>
+                        <p class="project-description">Durable outdoor furniture designed for comfort and style.</p>
+                        <button class="view-project-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Project 11: 1.jpg - Furniture -->
+            <div class="gallery-item" data-category="furniture">
+                <div class="gallery-item-inner" data-img-src="Images/1.jpg" data-title="Wooden Table Design" data-desc="Stylish wooden table perfect for dining or office use.">
+                    <img src="Images/1.jpg" alt="Wooden Table Design" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="project-title">Wooden Table Design</h3>
+                        <p class="project-description">Stylish wooden table perfect for dining or office use.</p>
+                        <button class="view-project-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Project 12: 2.jpg - Custom -->
+            <div class="gallery-item" data-category="custom">
+                <div class="gallery-item-inner" data-img-src="Images/2.jpg" data-title="Custom Shelf Unit" data-desc="Tailored shelving solution for modern living spaces.">
+                    <img src="Images/2.jpg" alt="Custom Shelf Unit" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="project-title">Custom Shelf Unit</h3>
+                        <p class="project-description">Tailored shelving solution for modern living spaces.</p>
+                        <button class="view-project-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+           
+
+           
+
+            <!-- New Project 21: custom door.729Z.png - Custom -->
+            <div class="gallery-item" data-category="custom">
+                <div class="gallery-item-inner" data-img-src="Images/custom door.729Z.png" data-title="Custom Door" data-desc="Beautifully crafted custom door with unique design.">
+                    <img src="Images/custom door.729Z.png" alt="Custom Door" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="project-title">Custom Door</h3>
+                        <p class="project-description">Beautifully crafted custom door with unique design.</p>
+                        <button class="view-project-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Project 22: WhatsApp Image 2025-07-24 at 11.59.42 AM.jpeg - Furniture -->
+            <div class="gallery-item" data-category="furniture">
+                <div class="gallery-item-inner" data-img-src="Images/WhatsApp Image 2025-07-24 at 11.59.42 AM.jpeg" data-title="Modern Furniture" data-desc="Contemporary furniture piece with clean lines.">
+                    <img src="Images/WhatsApp Image 2025-07-24 at 11.59.42 AM.jpeg" alt="Modern Furniture" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="project-title">Modern Furniture</h3>
+                        <p class="project-description">Contemporary furniture piece with clean lines.</p>
+                        <button class="view-project-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Project 23: WhatsApp Image 2025-07-24 at 11.59.44 AM.jpeg - Kitchen -->
+            <div class="gallery-item" data-category="kitchen">
+                <div class="gallery-item-inner" data-img-src="Images/WhatsApp Image 2025-07-24 at 11.59.44 AM.jpeg" data-title="Kitchen Detail" data-desc="Close-up of kitchen craftsmanship details.">
+                    <img src="Images/WhatsApp Image 2025-07-24 at 11.59.44 AM.jpeg" alt="Kitchen Detail" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3 class="project-title">Kitchen Detail</h3>
+                        <p class="project-description">Close-up of kitchen craftsmanship details.</p>
+                        <button class="view-project-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- Full Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="fullImage">
+        <div id="modalCaption" class="modal-caption"></div>
+    </div>
+
+<script>
+
+
+
+document.getElementById('closeLightbox').onclick = function() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+
+</script>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="section-title">
+            <h2>What Our Clients Say</h2>
+            <p>Testimonials from satisfied customers who experienced our craftsmanship</p>
+        </div>
+        <div class="testimonial-carousel owl-carousel owl-theme">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card">
+                <div class="client-profile">
+                    <div class="client-image">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Wajid Ali Malik">
+                    </div>
+                    <div class="client-info">
+                        <h4>Wajid Ali Malik</h4>
+                        <p>Homeowner, Islamabad</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"MashaAllah Great work Their workmanship is excellent. The attention to detail and quality of materials used exceeded my expectations."</p>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card">
+                <div class="client-profile">
+                    <div class="client-image">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Nabeel Rahmat">
+                    </div>
+                    <div class="client-info">
+                        <h4>Nabeel Rahmat</h4>
+                        <p>Business Owner</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Muhammad Ahmad craftsmanship and attention to detail were impressive. His polite and professional attitude made the experience even better. Highly recommend!"</p>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card">
+                <div class="client-profile">
+                    <div class="client-image">
+                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Daud Khan">
+                    </div>
+                    <div class="client-info">
+                        <h4>Daud Khan</h4>
+                        <p>Interior Designer</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Outstanding quality and service. The custom furniture pieces are exactly what we wanted. Will definitely work with them again!"</p>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <!-- Testimonial 4 -->
+            <div class="testimonial-card">
+                <div class="client-profile">
+                    <div class="client-image">
+                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Mohammad Shakeel">
+                    </div>
+                    <div class="client-info">
+                        <h4>Mohammad Shakeel</h4>
+                        <p>Restaurant Owner</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"The craftsmanship of our custom dining tables is exceptional. Muhammad Ahmad understood our vision perfectly and delivered beyond expectations."</p>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <!-- Testimonial 5 -->
+            <div class="testimonial-card">
+                <div class="client-profile">
+                    <div class="client-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-2lWq7cvJJ6g8kyxsfA7hfagryYdJ70_kDw&s" alt="Javed Iqbal">
+                    </div>
+                    <div class="client-info">
+                        <h4>Javed Iqbal</h4>
+                        <p>Office Manager</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"Professional, punctual, and skilled. Our office furniture renovation was completed perfectly and on schedule."</p>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <!-- Add more testimonials up to 10 -->
+            <!-- Testimonial 6 -->
+            <div class="testimonial-card">
+                <div class="client-profile">
+                    <div class="client-image">
+                        <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Ahmed Khan">
+                    </div>
+                    <div class="client-info">
+                        <h4>Ahmed Khan</h4>
+                        <p>Property Developer</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"The custom woodwork in our development projects has received numerous compliments. Exceptional quality and reliability."</p>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <!-- Testimonial 7 -->
+            <div class="testimonial-card">
+                <div class="client-profile">
+                    <div class="client-image">
+                        <img src="Images/female 1.png" alt="Sarah Ahmed">
+                    </div>
+                    <div class="client-info">
+                        <h4>Sarah Ahmed</h4>
+                        <p>Homeowner</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"The built-in wardrobe is beautiful and maximizes our space perfectly. Great attention to detail and craftsmanship."</p>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <!-- Testimonial 8 -->
+            <div class="testimonial-card">
+                <div class="client-profile">
+                    <div class="client-image">
+                        <img src="https://randomuser.me/api/portraits/men/88.jpg" alt="Imran Malik">
+                    </div>
+                    <div class="client-info">
+                        <h4>Imran Malik</h4>
+                        <p>Architect</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"As an architect, I appreciate the precision and skill in Muhammad Ahmad's work. He brings designs to life exactly as envisioned."</p>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <!-- Testimonial 9 -->
+            <div class="testimonial-card">
+                <div class="client-profile">
+                    <div class="client-image">
+                        <img src="Images/female 2.png" alt="Ayesha Khan">
+                    </div>
+                    <div class="client-info">
+                        <h4>Ayesha Khan</h4>
+                        <p>Café Owner</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"The custom tables and chairs for our café are not only beautiful but incredibly durable. Excellent craftsmanship!"</p>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <!-- Testimonial 10 -->
+            <div class="testimonial-card">
+                <div class="client-profile">
+                    <div class="client-image">
+                        <img src="Images/men test (1).jpg" alt="Zafar Ali">
+                    </div>
+                    <div class="client-info">
+                        <h4>Zafar Ali</h4>
+                        <p>Real Estate Agent</p>
+                    </div>
+                </div>
+                <p class="testimonial-text">"The quality of work has helped increase property values. Professional service and outstanding results every time."</p>
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+  <!-- Get a Quote Section -->
+  <section id="quote" class="section quote-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Get Your Free Quote</h2>
+        <p>Ready to bring your woodworking vision to life? Get a personalized quote in just a few steps.</p>
+      </div>
+      
+      <div class="quote-content">
+        <!-- Quote Form -->
+        <div class="quote-form-container">
+          <!-- Step Indicator -->
+          <div class="step-indicator">
+            <div class="step-dot active" data-step="1"></div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="2"></div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="3"></div>
+          </div>
+          
+          <!-- Step 1: Service Selection -->
+          <div class="quote-step active" id="step1">
+            <h3 class="step-title">Select Your Service</h3>
+            <div class="service-options">
+              <div class="service-option" data-service="furniture">
+                <h3>Custom Furniture</h3>
+                <p>Handcrafted tables, chairs, cabinets, and storage solutions</p>
+              </div>
+              <div class="service-option" data-service="renovation">
+                <h3>Home Renovations</h3>
+                <p>Complete kitchen remodels, bathroom vanities, and custom built-ins</p>
+              </div>
+              <div class="service-option" data-service="doors-windows">
+                <h3>Doors & Windows</h3>
+                <p>Custom door installation, window frames, and trim work</p>
+              </div>
+              <div class="service-option" data-service="restoration">
+                <h3>Repairs & Restoration</h3>
+                <p>Antique furniture restoration and repair services</p>
+              </div>
+            </div>
+            <button class="btn btn-wood btn-full next-step" data-next="2">Next Step</button>
+          </div>
+          
+          <!-- Step 2: Project Details -->
+          <div class="quote-step" id="step2">
+            <h3 class="step-title">Project Details</h3>
+            <form>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input type="text" id="firstName" required>
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" id="lastName" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" required>
+              </div>
+              <div class="form-group">
+                <label for="timeline">Project Timeline</label>
+                <select id="timeline">
+                  <option value="urgent">As soon as possible</option>
+                  <option value="1-3">Within 1-3 months</option>
+                  <option value="3-6">Within 3-6 months</option>
+                  <option value="6+">6+ months from now</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="details">Project Details</label>
+                <textarea id="details" rows="4" placeholder="Please describe your project in detail..."></textarea>
+              </div>
+            </form>
+            <div class="btn-group">
+              <button class="btn btn-wood prev-step" data-prev="1">Previous</button>
+              <button class="btn btn-wood next-step" data-next="3">Next Step</button>
+            </div>
+          </div>
+          
+          <!-- Step 3: Quote Summary -->
+          <div class="quote-step" id="step3">
+            <h3 class="step-title">Quote Summary</h3>
+            <div class="quote-summary">
+              <div class="quote-summary-item">
+                <span>Selected Service:</span>
+                <span id="summary-service">Custom Furniture</span>
+              </div>
+              <div class="quote-summary-item">
+                <span>Estimated Timeline:</span>
+                <span id="summary-timeline">4-6 weeks</span>
+              </div>
+              <div class="quote-summary-item">
+                <span>Materials:</span>
+                <span id="summary-materials">Premium Hardwood</span>
+              </div>
+              <div class="quote-summary-item">
+                <span>Labor:</span>
+                <span id="summary-labor">Master Craftsman</span>
+              </div>
+              <div class="quote-summary-item quote-note">
+                <span>Pricing:</span>
+                <span>Shared during consultation</span>
+              </div>
+            </div>
+            <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.6;">
+              This is an estimated quote based on the information provided. A detailed quote will be sent to your email after consultation with our master craftsmen.
+            </p>
+            <div class="btn-group">
+              <button class="btn btn-wood prev-step" data-prev="2">Previous</button>
+              <button class="btn btn-wood" id="submit-quote">Submit Quote Request</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Map and Contact Info -->
+        <div class="map-side">
+          <!-- Map -->
+          <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3322.4782106277125!2d73.1184768!3d33.6188406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfebf9e78790e5%3A0x87e05616ecb7e670!2sAhmad%20Wood%20Works%20-%20Mr.%20Carpenter!5e0!3m2!1sen!2s!4v1759464121654!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          
+          <!-- Contact Information -->
+          <div class="contact-cards">
+            <div class="contact-card">
+              <div class="contact-icon">
+                <i class="ri-phone-line"></i>
+              </div>
+              <h3>Phone</h3>
+              <p>+923079499909</p>
+            </div>
+            <div class="contact-card">
+              <div class="contact-icon">
+                <i class="ri-mail-line"></i>
+              </div>
+              <h3>Email</h3>
+              <p>carpenterahmad@gmail.com</p>
+            </div>
+            <div class="contact-card">
+              <div class="contact-icon">
+                <i class="ri-map-pin-line"></i>
+              </div>
+              <h3>Workshop</h3>
+              <p>Street 2, Fizzaya, colony, Islamabad, 44000</p>
+            </div>
+            <div class="contact-card">
+              <div class="contact-icon">
+                <i class="ri-time-line"></i>
+              </div>
+              <h3>Hours</h3>
+              <p>Mon-Sat: 7AM-6PM</p>
+            </div>
+          </div>
+          
+          <!-- Why Choose Us -->
+          <div class="why-choose">
+            <h3>Why Choose WoodCraft Masters</h3>
+            <ul>
+              <li>
+                <i class="ri-checkbox-circle-fill"></i>
+                <span>5+ years of master craftsmanship</span>
+              </li>
+              <li>
+                <i class="ri-checkbox-circle-fill"></i>
+                <span>Free consultation and quote</span>
+              </li>
+              <li>
+                <i class="ri-checkbox-circle-fill"></i>
+                <span>Premium materials and sustainable sourcing</span>
+              </li>
+              <li>
+                <i class="ri-checkbox-circle-fill"></i>
+                <span>Quality warranty on all workmanship</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <section class="faq-section" id="faqs">
+        <div class="faq-container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find quick answers to the most common queries from our clients.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-items">
+                    <details class="faq-item" open>
+                        <summary>How long does a typical custom furniture project take?</summary>
+                        <p>Project timelines depend on complexity, but most custom builds take between four to six weeks. We provide a detailed schedule once we review your requirements.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Do you offer on-site consultations?</summary>
+                        <p>Yes. We start with a virtual or phone consultation, followed by an on-site visit to capture precise measurements and finalise specifications.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Which materials do you use?</summary>
+                        <p>We work with premium hardwoods, engineered panels, and eco-friendly finishes. Material recommendations are tailored to your project’s durability and aesthetic needs.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Can you restore antique furniture?</summary>
+                        <p>Absolutely. We carefully assess each piece, source compatible materials, and restore it while preserving its original character.</p>
+                    </details>
+                </div>
+                <div class="faq-image">
+                    <img src="Images/service-3.jpg" alt="Craftsman working on wooden furniture details">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Muhammad Ahmad</h3>
+                <p>Professional Carpenter with over 5 years of experience in woodworking and furniture design.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#services">Custom Furniture Design</a></li>
+                    <li><a href="#services">Woodworking</a></li>
+                    <li><a href="#services">Renovation & Remodeling</a></li>
+                    <li><a href="#services">Furniture Repair</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Street 2 Fizzaya, colony, Islamabad, 44000 </li>
+                    <li><i class="fas fa-phone"></i> +923079499909</li>
+                    <li><i class="fas fa-envelope"></i> carpenterahmad@gmail.com</li>
+                    <li><i class="fas fa-clock"></i> Mon-Fri: 9AM - 6PM</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2023 Muhammad Ahmad Carpenter works. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <span class="close-lightbox" id="closeLightbox">×</span>
+        <div class="lightbox-content">
+            <img src="" alt="Full size image" class="lightbox-img" id="lightboxImg">
+            <iframe class="lightbox-video" style="display: none;" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <audio id="ambientAudio" preload="auto" loop src="Images/openai-fm-ballad-sincere.wav"></audio>
+
+    <div class="floating-actions" aria-label="Quick contact and ambience controls">
+        <a href="https://wa.me/+923201968687" class="floating-btn whatsapp" target="_blank" aria-label="Chat on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <button class="floating-btn audio" id="audioToggle" aria-label="Toggle workshop ambience" aria-pressed="false">
+            <i class="fas fa-volume-up"></i>
+        </button>
+        <button class="floating-btn hammer" id="hammerBtn" aria-label="View Services">
+            <i class="fas fa-hammer"></i>
+        </button>
+    </div>
+
+    <aside class="color-board" id="colorBoard" aria-label="Wood tone color palette">
+        <div class="color-options">
+            <button class="color-option" data-palette='{"primary":"#5b3716","secondary":"#d6a365","accent":"#2f1c0f","section":"#f1e3d3","card":"#fff7ec"}' style="--option-color:#5b3716" aria-label="Deep Walnut"></button>
+            <button class="color-option" data-palette='{"primary":"#704214","secondary":"#f0c381","accent":"#2c1b0c","section":"#f7ebd6","card":"#fff5e6"}' style="--option-color:#704214" aria-label="Golden Oak"></button>
+            <button class="color-option" data-palette='{"primary":"#3e2a1f","secondary":"#b68a65","accent":"#20140c","section":"#efe1cf","card":"#f8efe5"}' style="--option-color:#3e2a1f" aria-label="Espresso Brown"></button>
+            <button class="color-option" data-palette='{"primary":"#8b5a2b","secondary":"#f2e0c9","accent":"#4e3421","section":"#f9f1e5","card":"#fffaf3"}' style="--option-color:#8b5a2b" aria-label="Maple Tan"></button>
+        </div>
+        <button class="color-reset" type="button">Reset</button>
+    </aside>
+
+    <button id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/testimonial.js"></script>
+    
+</body>
+</html>
